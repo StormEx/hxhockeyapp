@@ -1,0 +1,15 @@
+-main Main
+
+-swf-header 200:200:60:000000
+-swf-version 11.3
+
+-cp src
+
+-v
+
+-swf export/flash/hockeyapp.swf
+
+-D fdb
+-D network-sandbox
+
+-debug
