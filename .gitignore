@@ -1,0 +1,12 @@
+# Builds
+bin/
+export*/
+build/
+dump/
+_assets/
+
+# IntelliJ IDEA
+.idea/
+out/
+classes/
+**/*.iml
