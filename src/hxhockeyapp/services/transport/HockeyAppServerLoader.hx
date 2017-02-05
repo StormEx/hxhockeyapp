@@ -120,10 +120,12 @@ class HockeyAppServerLoader {
 	}
 
 	function onData(val:String) {
+		trace("crash to hockeyapp was sent successfuly!");
 		complete(true);
 	}
 
 	function onError(val:String) {
+		trace("can't send crash to hockeyapp!");
 		complete(false);
 	}
 

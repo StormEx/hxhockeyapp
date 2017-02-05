@@ -33,19 +33,19 @@ class BaseHockeyAppCrashesService {
 
 		var info:String = '';
 
-		info += getInfoPart(_appPackage);
-		info += getInfoPart(_appVersion);
-		info += getInfoPart(_osVersion);
-		info += getInfoPart(_manufacturer);
-		info += getInfoPart(_model);
-		info += getInfoPart(_date);
-		info += getInfoPart(_crashReporter);
+		info += getInfoPart("Package", _appPackage);
+		info += getInfoPart("Version", _appVersion);
+		info += getInfoPart("OS", _osVersion);
+		info += getInfoPart("Manufacturer", _manufacturer);
+		info += getInfoPart("Model", _model);
+		info += getInfoPart("Date", _date);
+		info += getInfoPart("CrashReporter", _crashReporter);
 
 		return info;
 	}
 
-	function getInfoPart(data:String):String {
-		return data != null && data.length > 0 ? '$data\r\n' : "";
+	function getInfoPart(prefix:String, data:String):String {
+		return data != null && data.length > 0 ? '$prefix: $data\r\n' : "";
 	}
 
 	function sendCrash(callStack:String) {
@@ -83,7 +83,7 @@ class BaseHockeyAppCrashesService {
 	}
 
 	function get__date():String {
-		return DateTools.format(Date.now(), "%a %b %d %T %Y");
+		return DateTools.format(Date.now(), "%a %b %d %T GMT+00:00 %Y");
 	}
 
 	function get__crashReporter():String {
