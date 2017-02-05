@@ -5,11 +5,21 @@
 
 -cp src
 
--v
-
 -swf export/flash/hockeyapp.swf
 
 -D fdb
 -D network-sandbox
+
+-debug
+
+--next
+
+-main Main
+
+-cp src
+
+-js export/js/hockeyapp.js
+
+-D fdb
 
 -debug
