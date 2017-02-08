@@ -1,4 +1,4 @@
-package hxhockeyapp.services.transport;
+package hxhockeyapp.transport;
 
 import haxe.Http;
 
@@ -69,7 +69,7 @@ class HockeyAppServerLoader {
 					case HockeyAppServerParameterType.FILE:
 						data += '\r\n--$boundary\r\nContent-Disposition: form-data; name="${p.name}"; filename="${p.name}.txt"\r\nContent-Type: text/plain\r\n\r\n${p.value}';
 					default:
-						data += '\r\n--$boundary\r\nContent-Disposition: form-data; name="${p.name}"r\n\r\n${p.value}';
+						data += '\r\n--$boundary\r\nContent-Disposition: form-data; name="${p.name}"\r\n\r\n${p.value}';
 				}
 			}
 			data += '\r\n--$boundary--\r\n';

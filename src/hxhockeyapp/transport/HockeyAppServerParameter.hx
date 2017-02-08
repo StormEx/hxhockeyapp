@@ -1,4 +1,4 @@
-package hxhockeyapp.services.transport;
+package hxhockeyapp.transport;
 
 class HockeyAppServerParameter {
 	public var type(default, null):HockeyAppServerParameterType;

@@ -1,9 +1,9 @@
-package hxhockeyapp.services.crashes.platforms.js;
+package hxhockeyapp.complex.crashes.services.platforms.js;
 
 #if js
 import js.Error;
 import js.Browser;
-import hxhockeyapp.services.crashes.common.BaseHockeyAppCrashesService;
+import hxhockeyapp.complex.crashes.services.common.BaseHockeyAppCrashesService;
 
 class JsHockeyAppCrashesService extends BaseHockeyAppCrashesService {
 	public function new(appId:String, appVersion:String, appPackage:String) {

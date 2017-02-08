@@ -1,8 +1,8 @@
-package hxhockeyapp.services.crashes.common;
+package hxhockeyapp.complex.crashes.services.common;
 
-import hxhockeyapp.services.transport.HockeyAppServerParameterType;
-import hxhockeyapp.services.transport.HockeyAppServerParameter;
-import hxhockeyapp.services.transport.HockeyAppServerLoader;
+import hxhockeyapp.transport.HockeyAppServerLoader;
+import hxhockeyapp.transport.HockeyAppServerParameterType;
+import hxhockeyapp.transport.HockeyAppServerParameter;
 
 class BaseHockeyAppCrashesService {
 	var _appId:String = null;
