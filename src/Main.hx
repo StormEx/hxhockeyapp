@@ -9,7 +9,7 @@ class Main {
 	}
 
 	public static function main() {
-		HockeyApp.setup(id, "0.3.37", "test.app", true);
+		HockeyApp.setup(id, "0.3.37", "test.app", "12648754324", true);
 
 		try {
 			trace("try to get value from null");
@@ -30,6 +30,6 @@ class Main {
 //		var service:HockeyAppCrashesService = new HockeyAppCrashesService(id, "0.3.36", "test.app");
 //		service.send(e);
 
-		HockeyApp.sendCrash(e, "uncaught exception", "123456");
+		HockeyApp.sendCrash(e, "uncaught exception");
 	}
 }

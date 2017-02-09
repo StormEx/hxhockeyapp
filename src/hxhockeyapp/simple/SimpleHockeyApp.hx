@@ -23,56 +23,70 @@ class SimpleHockeyApp {
 	static var _appId:String = null;
 	static var _appVersion:String = null;
 	static var _appPackage:String = null;
+	static var _userId:String = null;
+
+	static var _registeredUncaught:Bool = false;
 
 	static var _info:HockeyAppSystemInfo = null;
 
-	static public function setup(appId:String, appVersion:String, appPackage:String, catchUncaghtException:Bool = false) {
+	static public function setup(appId:String, appVersion:String, appPackage:String, userId:String = null, catchUncaughtException:Bool = false) {
 		_appId = appId;
 		_appVersion = appVersion;
 		_appPackage = appPackage;
+		_userId = userId;
 
 		fillSystemInfo();
 
-		if(catchUncaghtException) {
+		if(catchUncaughtException) {
+			if(!_registeredUncaught) {
 #if js
-			Browser.window.addEventListener("error", onUncaghtError);
+				Browser.window.addEventListener("error", onUncaghtError);
 #elseif flash
-			Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, onUncaghtError);
+				Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, onUncaghtError);
 #end
+			}
+		}
+		else {
+			if(_registeredUncaught) {
+#if js
+				Browser.window.removeEventListener("error", onUncaghtError);
+#elseif flash
+				Lib.current.loaderInfo.uncaughtErrorEvents.removeEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, onUncaghtError);
+#end
+			}
 		}
 	}
 
 #if js
 	static function onUncaghtError(e:ErrorEvent) {
-		trace(e);
-		sendCallStack(e.error == null ? e.message : e.error.stack);
+		sendCallStack(e.error == null ? '${e.filename}: ${e.message}' : e.error.stack, "uncaught exception");
 	}
 #elseif flash
 	static function onUncaghtError(e:UncaughtErrorEvent) {
 		var callStack:String = "";
 		var error:Error = Std.instance(e.error, Error);
 		if(error == null) {
-			callStack = e.toString();
+			callStack = '${e.errorID}: ${e.text}';
 		}
 		else {
 			callStack = error.getStackTrace();
 		}
 
-		sendCallStack(callStack);
+		sendCallStack(callStack, "uncaught exception");
 
 		e.preventDefault();
 	}
 #end
 
-	static public function sendCrash(e:Error, description:String = null, userId:String = null) {
+	static public function sendCrash(e:Error, description:String = null) {
 #if js
-		sendCallStack(e.stack, description, userId);
+		sendCallStack(e.stack, description);
 #elseif flash
-		sendCallStack(e.getStackTrace(), description, userId);
+		sendCallStack(e.getStackTrace(), description);
 #end
 	}
 
-	static function sendCallStack(callStack:String, description:String = null, userId:String = null) {
+	static function sendCallStack(callStack:String, description:String = null) {
 		if(_appId != null && _appId.length > 0 &&
 		_appVersion != null && _appVersion.length > 0 &&
 		_appPackage != null && _appPackage.length > 0 &&
@@ -95,8 +109,8 @@ class SimpleHockeyApp {
 			if(description != null && description.length > 0) {
 				params.push(new HockeyAppServerParameter("description", description, HockeyAppServerParameterType.FILE));
 			}
-			if(userId != null && userId.length > 0) {
-				params.push(new HockeyAppServerParameter("userID", userId, HockeyAppServerParameterType.VALUE));
+			if(_userId != null && _userId.length > 0) {
+				params.push(new HockeyAppServerParameter("userID", _userId, HockeyAppServerParameterType.VALUE));
 			}
 
 			var url:String = '${HockeyApp.HOCKEY_APP_URL}$_appId/crashes/upload';
