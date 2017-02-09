@@ -59,7 +59,19 @@ class SimpleHockeyApp {
 
 #if js
 	static function onUncaghtError(e:ErrorEvent) {
-		sendCallStack(e.error == null ? '${e.filename}: ${e.message}' : e.error.stack, "uncaught exception");
+		var callStack:String = "";
+
+		if(e.error != null) {
+			callStack = e.error.stack;
+		}
+		else {
+			if(e.filename != null && e.filename.length > 0) {
+				callStack += e.filename + ': ';
+			}
+			callStack += e.message;
+		}
+
+		sendCallStack(callStack, "uncaught exception");
 	}
 #elseif flash
 	static function onUncaghtError(e:UncaughtErrorEvent) {
