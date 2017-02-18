@@ -11,7 +11,7 @@ class JsHockeyAppSystemInfo {
 
 	public function new() {
 		os = Browser.window.navigator.platform;
-		model = Browser.window.navigator.userAgent;
+		manufacturer = Browser.window.navigator.userAgent;
 	}
 }
 #end
