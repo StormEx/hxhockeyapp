@@ -1,11 +1,11 @@
 package hxhockeyapp;
 
-#if (hxhockeyapp_simple && (flash || js))
-import hxhockeyapp.simple.SimpleHockeyApp;
-
-typedef HockeyApp = SimpleHockeyApp;
-#else
+#if (hxhockeyapp_full && (flash || js))
 import hxhockeyapp.complex.ComplexHockeyApp;
 
 typedef HockeyApp = ComplexHockeyApp;
+#else
+import hxhockeyapp.simple.SimpleHockeyApp;
+
+typedef HockeyApp = SimpleHockeyApp;
 #end

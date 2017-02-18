@@ -99,11 +99,7 @@ class SimpleHockeyApp {
 	}
 
 	static function sendCallStack(callStack:String, description:String = null) {
-		if(_appId != null && _appId.length > 0 &&
-		_appVersion != null && _appVersion.length > 0 &&
-		_appPackage != null && _appPackage.length > 0 &&
-		_info != null) {
-
+		if(isValid()) {
 			var info:String = '';
 
 			info += _appPackage != null && _appPackage.length > 0 ? 'Package: $_appPackage\r\n' : "";
@@ -136,6 +132,11 @@ class SimpleHockeyApp {
 			};
 			loader.load(true);
 		}
+	}
+
+	static function isValid():Bool {
+		return _appId != null && _appId.length > 0 && _appVersion != null && _appVersion.length > 0 &&
+		       _appPackage != null && _appPackage.length > 0 && _info != null;
 	}
 
 	static function fillSystemInfo() {
