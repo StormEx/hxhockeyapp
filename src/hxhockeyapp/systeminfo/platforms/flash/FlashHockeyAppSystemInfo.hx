@@ -11,6 +11,8 @@ class FlashHockeyAppSystemInfo {
 
 	public function new() {
 		os = Capabilities.os;
+		manufacturer = Capabilities.manufacturer;
+		crashReporter = 'player: ${Capabilities.playerType}; cpu: ${Capabilities.cpuArchitecture}; version: ${Capabilities.version}; dpi: ${Capabilities.screenDPI}; hardvare: ${!Capabilities.avHardwareDisable}'
 	}
 }
 #end
