@@ -1,6 +1,7 @@
 package ;
 
 import hxhockeyapp.HockeyApp;
+
 class Main {
 	static var id:String = "da6c8f7efc6241a49b55c63ad29d4fa5";
 	static var token:String = "2f6e1aeaaa2c4c5e9e66f893be9dc59c";

@@ -136,7 +136,7 @@ class HockeyApp {
 
 	static function isValid():Bool {
 		return _appId != null && _appId.length > 0 && _appVersion != null && _appVersion.length > 0 &&
-		_appPackage != null && _appPackage.length > 0 && _info != null;
+		       _appPackage != null && _appPackage.length > 0 && _info != null;
 	}
 
 	static function fillSystemInfo() {
